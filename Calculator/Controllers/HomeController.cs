@@ -11,27 +11,35 @@ namespace Calculator.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public ActionResult Index(CalculatorLogic model, string UserInput)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                if (UserInput == "add")
+                {
+                    model.Result = model.Num1 + model.Num2;
+                }
+                if (UserInput == "sub")
+                {
+                    model.Result = model.Num1 - model.Num2;
+                }
+                if (UserInput == "mul")
+                {
+                    model.Result = model.Num1 * model.Num2;
+                }
+                if (UserInput == "div")
+                {
+                    model.Result = model.Num1 / model.Num2;
+                }
+            }
+            return View(model);
         }
     }
 }

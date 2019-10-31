@@ -2,7 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@model CalculatorLogic
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend style="color:blue"> Simple Calculator </legend>
+
+        @Html.EditorFor(x => x.Num1)
+        <br />
+        <br />
+        @Html.EditorFor(x => x.Num2)
+        <br />
+        <br />
+        <input type="submit" value="add" name="UserInput" />
+        <input type="submit" value="sub" name="UserInput" />
+        <input type="submit" value="mul" name="UserInput" />
+        <input type="submit" value="div" name="UserInput" />
+        <br />
+        <br />
+        <h2 style="color:red">
+            @Html.Label("Result is :")
+            @Html.DisplayFor(x => x.Result)
+        </h2>
+    </fieldset>
+}
+
+
